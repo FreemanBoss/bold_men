@@ -1,0 +1,28 @@
+{% extends "main/base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4 fw-normal">Welcome to our Fabrics Store</h1>
+    <div class="row">
+	    {% for fabric in fabrics %}
+	      <div class="col-md-3 mb-4">
+		<div class="card">
+		    {% with image=fabric.get_first_image  %}
+			{% if image %}
+				<img src="{{ image.image.url }}" class="card-img-top w-100" alt="Fabric 1" width="200" height="200"  loading="lazy">
+			{% else %}
+				<img src="" class="card-img-top" alt="Fabric 1">
+			{% endif %}
+		    {% endwith %}
+		  <div class="card-body">
+			  <h5 class="card-title">{{ fabric.name }}</h5>
+			  <p class="card-text">{{ fabric.description }}</p>
+		    <a href="{% url 'fabrics:fabric-detail' fabric.pk  %}" class="btn btn-primary">View Details</a>
+		  </div>
+		</div>
+	      </div>
+	    {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+

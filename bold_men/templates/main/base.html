@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+        <head>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width">
+                <title>{% block title %}{% endblock %}</title>
+                <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+                <link rel="stylesheet" href="{% static 'css/style.css' %}">
+                <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+                <link rel="stylesheet" href="{% static 'css/bootstrap-icons.css' %}">
+                <script src="{% static 'js/bootstrap.js' %}" defer></script>
+{% comment %}
+	{% load livereload_tags %}
+	{% livereload_script %}
+	
+{% endcomment %}
+        </head>
+        <body>
+                {% include "main/navbar.html" %}
+		<div class="container px-3">
+			<div class="row">
+				<div class="col">
+					{% if messages %}
+						{% for message in messages %}
+						<div class="alert alert-{{ message.tags }} mt-2">
+								{{ message }}
+							</div>
+						{% endfor %}
+					{% endif %}
+				</div>
+			</div>
+		</div>
+
+
+                {% block content %}
+
+                {% endblock %}
+
+                {% include "main/footer.html" %}
+        </body>
+</html>

@@ -1,0 +1,302 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block content %}
+<main>
+	<!-- Hero Section -->
+	<section class="bg-primary text-white text-center p-5">
+	  <div class="container">
+	    <h1 class="display-4 fw-bold">Dress Boldly, Live Boldly</h1>
+	    <p class="lead">Discover the essence of style with Bold Men. Your journey to a perfect fit starts here.</p>
+	    <a href="#shop" class="btn btn-light btn-lg">Shop Now</a>
+	  </div>
+	</section>
+	<!-- How It Works Section -->
+	<section id="how-it-works" class="container my-5">
+	  <div class="row text-center">
+	    <h2 class="fw-bold mb-4">How It Works</h2>
+	    <!-- Step 1 -->
+	    <div class="col-md-4 mb-3">
+	      <span class="icon bg-primary text-white rounded-circle mb-2">
+		<i class="bi bi-fabric"></i> <!-- Placeholder for fabric icon -->
+	      </span>
+	      <h3 class="h5 mb-2">Choose Fabric</h3>
+	      <p>Select from a variety of high-quality fabrics to find the perfect one for your garment.</p>
+	    </div>
+	    <!-- Step 2 -->
+	    <div class="col-md-4 mb-3">
+	      <span class="icon bg-primary text-white rounded-circle mb-2">
+		<i class="bi bi-pencil-square"></i> <!-- Placeholder for design icon -->
+	      </span>
+	      <h3 class="h5 mb-2">Select Design</h3>
+	      <p>Choose a style from our collection or upload your own design for a unique look.</p>
+	    </div>
+	    <!-- Step 3 -->
+	    <div class="col-md-4 mb-3">
+	      <span class="icon bg-primary text-white rounded-circle mb-2">
+		<i class="bi bi-rulers"></i> <!-- Placeholder for measurement icon -->
+	      </span>
+	      <h3 class="h5 mb-2">Drop Measurements</h3>
+	      <p>Use our guide to provide your measurements for a tailored fit.</p>
+	    </div>
+	    <!-- Step 4 -->
+	    <div class="col-md-4 mb-3">
+	      <span class="icon bg-primary text-white rounded-circle mb-2">
+		<i class="bi bi-cart-check"></i> <!-- Placeholder for order icon -->
+	      </span>
+	      <h3 class="h5 mb-2">Place Order</h3>
+	      <p>Review your choices and place your order with ease.</p>
+	    </div>
+	  </div>
+	</section>
+
+	</section>
+	<!-- Featured Fabrics Section -->
+	<section class="container my-5" id="featured-fabrics">
+	  <h2 class="fw-bold text-center mb-4">Featured Fabrics</h2>
+	  <div class="row row-cols-1 row-cols-md-3 g-4">
+	    <!-- Fabric Card 1 -->
+	    {% for fabric in featured_fabrics %}
+		    <div class="col-md-3">
+		      <div class="card h-100">
+			      <img src="{{ fabric.get_first_image.image.url }}" class="card-img-top w-100" alt="Fabric Design" loading="lazy" width="300" height="200">
+			<div class="card-body">
+				<h5 class="card-title">{{ fabric.name }}</h5>
+				<p class="card-text">{{ fabric.description }}</p>
+				<!-- To setup url -->
+			  <a href="" class="btn btn-primary">Learn More</a>
+			</div>
+		      </div>
+		    </div>
+	    {% endfor %}
+	    </div>
+	  </div>
+
+	  <a href="{% url 'fabrics:fabric-list' %}" class="btn btn-primary my-4" >View All Fabrics</a>
+	</section>
+	
+
+
+	<!-- Custom Orders Section -->
+	<section class="container my-5" id="custom-orders">
+	  <h2 class="fw-bold text-center mb-4">Custom Orders</h2>
+	  <p class="text-center mb-4">Looking to place a bulk order for your next big event? Whether it's for student graduations, parties, or corporate events, we make it easy to get the custom clothing you need.</p>
+	  <div class="d-flex justify-content-center">
+	    <!-- Trigger Button for Modal -->
+	    <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#requestQuoteModal">
+	      Request Quote
+	    </button>
+	  </div>
+	</section>
+
+	<!-- Modal -->
+	<div class="modal fade" id="requestQuoteModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+		<h5 class="modal-title" id="modalLabel">Request a Custom Order Quote</h5>
+		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+		<!-- Form inside Modal -->
+		<form id="quoteForm">
+		  <div class="mb-3">
+		    <label for="eventName" class="form-label">Event Name</label>
+		    <input type="text" class="form-control" id="eventName" required>
+		  </div>
+		  <div class="mb-3">
+		    <label for="eventDate" class="form-label">Event Date</label>
+		    <input type="date" class="form-control" id="eventDate" required>
+		  </div>
+		  <div class="mb-3">
+		    <label for="fabricType" class="form-label">Fabric Type</label>
+		    <select class="form-select" id="fabricType" required>
+		      <option selected>Choose...</option>
+		      <option value="silk">Silk</option>
+		      <option value="cotton">Cotton</option>
+		      <option value="velvet">Velvet</option>
+		      <!-- Add more fabric options here -->
+		    </select>
+		  </div>
+		  <div class="mb-3">
+		    <label for="quantity" class="form-label">Quantity</label>
+		    <input type="number" class="form-control" id="quantity" required>
+		  </div>
+		  <div class="mb-3">
+		    <label for="additionalInfo" class="form-label">Additional Information</label>
+		    <textarea class="form-control" id="additionalInfo" rows="3"></textarea>
+		  </div>
+		  <div class="modal-footer">
+		    <button type="submit" class="btn btn-primary">Submit Request</button>
+		  </div>
+		</form>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- Measurement Guide Section -->
+	<section class="container my-5" id="measurement-guide">
+	  <h2 class="fw-bold text-center mb-4">Measurement Guide</h2>
+	  <p class="text-center mb-4">Follow our detailed guide to take your measurements accurately for the perfect custom fit.</p>
+	  
+	  <!-- Step-by-Step Instructions -->
+	  <div class="row">
+	    <div class="col-md-6">
+	      <img src="measurement-instructions.jpg" alt="Measurement Instructions" class="img-fluid mb-3">
+	    </div>
+	    <div class="col-md-6">
+	      <h3 class="h5 mb-3">How to Measure</h3>
+	      <ol>
+		<li>Shoulder Width: Measure from one shoulder point to the other at the back.</li>
+		<li>Chest: Measure around the fullest part of your chest.</li>
+		<li>Waist: Measure around your natural waistline.</li>
+		<!-- Add more measurement steps as needed -->
+	      </ol>
+	    </div>
+	  </div>
+	  
+	  <!-- Video Tutorial -->
+	  <div class="text-center my-4">
+	    <h3 class="h5 mb-3">Video Tutorial</h3>
+	    <video controls width="75%">
+	      <source src="measurement-video.mp4" type="video/mp4">
+	      Your browser does not support the video tag.
+	    </video>
+	  </div>
+	  
+	  <!-- Downloadable Guide -->
+	  <div class="text-center my-4">
+	    <a href="measurement-guide.pdf" class="btn btn-primary" download>Download Measurement Guide</a>
+	  </div>
+	  
+	  <!-- Customer Support -->
+	  <div class="text-center my-4">
+	    <p>Need help? Our experts are here to assist you with any measurement questions.</p>
+	    <a href="#contact" class="btn btn-outline-primary">Contact Us</a>
+	  </div>
+	</section>
+	<!-- Testimonials Section -->
+	<section class="container my-5" id="testimonials">
+	  <h2 class="fw-bold text-center mb-4">What Our Customers Say</h2>
+	  <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel">
+	    <div class="carousel-inner">
+	      <!-- Testimonial 1 -->
+	      <div class="carousel-item active">
+		<blockquote class="blockquote text-center">
+		  <p class="mb-4">"Bold Men provided the best shopping experience! The fabric quality is top-notch, and the fit is perfect."</p>
+		  <footer class="blockquote-footer">John Doe, <cite title="Source Title">Happy Customer</cite></footer>
+		</blockquote>
+	      </div>
+	      <!-- Testimonial 2 -->
+	      <div class="carousel-item">
+		<blockquote class="blockquote text-center">
+		  <p class="mb-4">"I ordered custom suits for our corporate event, and the attention to detail was incredible. Highly recommend!"</p>
+		  <footer class="blockquote-footer">Jane Smith, <cite title="Source Title">CEO of XYZ Corp</cite></footer>
+		</blockquote>
+	      </div>
+	      <!-- Add more testimonials as needed -->
+	    </div>
+	    <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev">
+	      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	      <span class="visually-hidden">Previous</span>
+	    </button>
+	    <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next">
+	      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+	      <span class="visually-hidden">Next</span>
+	    </button>
+	  </div>
+	</section>
+	<!-- About Us Section -->
+	<section class="container my-5" id="about-us">
+	  <h2 class="fw-bold text-center mb-4">About Bold Men</h2>
+	  
+	  <!-- Brand Story -->
+	  <div class="row mb-4">
+	    <div class="col-lg-6">
+	      <img src="brand-story-image.jpg" alt="Our Story" class="img-fluid">
+	    </div>
+	    <div class="col-lg-6">
+	      <h3 class="h5 mb-3">Our Story</h3>
+	      <p>Founded in [Year], Bold Men began with a vision to revolutionize men's fashion. What started as a small boutique has now become a symbol of elegance and innovation in the industry.</p>
+	    </div>
+	  </div>
+	  
+	  <!-- Mission Statement -->
+	  <div class="row mb-4">
+	    <div class="col">
+	      <h3 class="h5 mb-3">Our Mission</h3>
+	      <p>To provide every man with the opportunity to express himself through high-quality, tailor-made clothing that stands out in both style and comfort.</p>
+	    </div>
+	  </div>
+	  
+	  <!-- Unique Selling Points -->
+	  <div class="row mb-4">
+	    <div class="col">
+	      <h3 class="h5 mb-3">Why Choose Us</h3>
+	      <ul>
+		<li>Exclusive access to rare and premium fabrics.</li>
+		<li>State-of-the-art custom fitting technology for the perfect fit.</li>
+		<li>Innovative designs that blend tradition with modernity.</li>
+	      </ul>
+	    </div>
+	  </div>
+	  
+	  <!-- Team Introduction -->
+	  <div class="row mb-4">
+	    <div class="col">
+	      <h3 class="h5 mb-3">Meet the Team</h3>
+	      <!-- Add team members here -->
+	    </div>
+	  </div>
+	  
+	  <!-- Social Proof -->
+	  <div class="row mb-4">
+	    <div class="col">
+	      <h3 class="h5 mb-3">Recognition</h3>
+	      <p>We're honored to have been featured in [Magazine Name], recognized at [Award Event], and celebrated by our loyal customers worldwide.</p>
+	    </div>
+	  </div>
+	</section>
+	<!-- Contact Section -->
+	<section class="container my-5" id="contact">
+	  <h2 class="fw-bold text-center mb-4">Get in Touch</h2>
+	  <div class="row justify-content-center">
+	    <div class="col-md-8">
+	      <!-- Contact Form -->
+	      <form>
+		<div class="mb-3">
+		  <label for="fullName" class="form-label">Full Name</label>
+		  <input type="text" class="form-control" id="fullName" required>
+		</div>
+		<div class="mb-3">
+		  <label for="emailAddress" class="form-label">Email Address</label>
+		  <input type="email" class="form-control" id="emailAddress" required>
+		</div>
+		<div class="mb-3">
+		  <label for="message" class="form-label">Message</label>
+		  <textarea class="form-control" id="message" rows="4" required></textarea>
+		</div>
+		<div class="text-center">
+		  <button type="submit" class="btn btn-primary">Send Message</button>
+		</div>
+	      </form>
+	    </div>
+	  </div>
+	  
+	  <!-- Social Media Links -->
+	  <div class="text-center mt-4">
+	    <p>Connect with us on social media:</p>
+	    <a href="https://www.facebook.com/YourPage" class="me-2">
+	      <i class="bi bi-facebook"></i>
+	    </a>
+	    <a href="https://www.twitter.com/YourProfile" class="me-2">
+	      <i class="bi bi-twitter"></i>
+	    </a>
+	    <a href="https://www.instagram.com/YourProfile">
+	      <i class="bi bi-instagram"></i>
+	    </a>
+	    <!-- Add more social media links as needed -->
+	  </div>
+	</section>
+
+</main>
+{% endblock %}

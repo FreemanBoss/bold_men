@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <!-- Brand Logo -->
+    <a class="navbar-brand" href="#">Bold Men</a>
+    <!-- Toggler for Mobile -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Navbar Links -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url  'home-page' %}">Home</a>
+        </li>
+	<li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        More Sections
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+			<li>
+			  <a class="dropdown-item" href="#how-it-works">How It Works</a>
+			</li>
+			<li>
+			  <a class="dropdown-item" href="#featured-fabrics">Featured Fabrics</a>
+			</li>
+			<li>
+			  <a class="dropdown-item" href="#custom-orders">Custom Orders</a>
+			</li>
+			<li>
+			  <a class="dropdown-item" href="#measurement-guide">Measurement Guide</a>
+			</li>
+			<li>
+			  <a class="dropdown-item" href="#testimonials">Testimonials</a>
+			</li>
+
+                    </ul>
+                </li>
+	{% if not user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'accounts:user-type' %}">Register</a>
+        </li>
+        </li>
+	 <li class="nav-item">
+		 <a class="nav-link" href="{% url 'accounts:login'  %}">Login</a>
+	</li>
+
+	{% else %}
+
+	{% if user_type == 'INDIVIDUAL' %}
+		{% include "main/individual_nav.html" %}	
+	{% elif user_type == 'CLIENT' %}
+		{% include "main/client_nav.html" %}	
+	{% else %}
+		{% include "main/employee_nav.html" %}	
+	{% endif %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'accounts:profile' %}">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
+        </li>	
+	{% endif %}
+	<li class="nav-item">
+	  <a class="nav-link" href="#about-us">About Us</a>
+	</li>
+	<li class="nav-item">
+	  <a class="nav-link" href="#contact">Contact</a>
+	</li>
+      </ul>
+    </div>
+  </div>
+</nav>

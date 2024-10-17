@@ -1,0 +1,10 @@
+{% extends "main/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<main class="container py-5">
+	<form method="post">
+		{% csrf_token %}
+		{% crispy form %}
+	</form>
+</main>
+{% endblock %}

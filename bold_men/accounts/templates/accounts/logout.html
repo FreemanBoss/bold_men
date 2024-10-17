@@ -1,0 +1,9 @@
+{% extends "main/base.html" %}
+{% block content %}
+<main class="container py-5 my-5">
+	<h2>You have been logged out</h2>	
+	<small class="text-muted">
+		<a class="btn btn-primary" href="{% url 'accounts:login' %}">Log In Again</a>
+	</small>
+</main>
+{% endblock %}
